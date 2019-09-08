@@ -24,12 +24,14 @@ public class ClientSetUp : MonoBehaviour
 
     public void Connect()
     {
+        Debug.Log("Connect");
         client.AttachConnectedHandler(PlayerConnected);
         client.Connect(playername);
     }
 
     private void PlayerConnected(Connection connection, PlayerController player)
     {
+        Debug.Log("Connected");
         SceneManager.LoadScene("ClientConnected", LoadSceneMode.Single);
     }
 
