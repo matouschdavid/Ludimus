@@ -32,7 +32,7 @@ namespace LudimusServerDev
 
         public static void StartServer()
         {
-            Console.WriteLine("Starting server");
+            
             server.Bind(new IPEndPoint(IPAddress.Any, 8080));
             server.Listen(0);
             server.BeginAccept(AcceptCallback, null);
@@ -40,7 +40,6 @@ namespace LudimusServerDev
 
         private static void AcceptCallback(IAsyncResult ar)
         {
-            Console.WriteLine("Accepting new Client");
             Socket socket;
             try
             {
@@ -119,7 +118,7 @@ namespace LudimusServerDev
 
         public static void Connect(HandleInputDel handleInput, NewConnectionDel newConnectionHandler, string playername)
         {
-            Console.WriteLine("Start connecting");
+            
             Thread t = new Thread(new ParameterizedThreadStart(LookForConnection));
             List<object> p = new List<object> { handleInput, newConnectionHandler };
             t.Start(p);
@@ -145,7 +144,6 @@ namespace LudimusServerDev
                     Console.WriteLine("Failed to connect at attempt: " + attempts);
                 }
             }
-            Console.WriteLine("Connected");
             Client = new Connection
             {
                 Client = client,
