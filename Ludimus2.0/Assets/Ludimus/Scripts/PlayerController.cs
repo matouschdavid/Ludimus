@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ConnectionNew;
 
 public class PlayerController : MonoBehaviour
 {
-    private Connection.HandleInputDel handlePublicMessage;
+    private HandleInputDel handlePublicMessage;
 
     private Queue<Data> handleInputQ = new Queue<Data>();
 
-    private Connection.HandleInputDel handlePrivateMessage;
+    private HandleInputDel handlePrivateMessage;
 
-    private Connection client;
+    private ConnectionNew client;
 
     // Update is called once per frame
     void Update()
@@ -21,7 +22,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void SetUp(Connection c, Connection.HandleInputDel handlePublicMsg)
+    public void SetUp(ConnectionNew c, HandleInputDel handlePublicMsg)
     {
         c.HandleInput = HandleInput;
         client = c;
@@ -50,13 +51,13 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    public void AttachMsgHandler(Connection.HandleInputDel handler)
+    public void AttachMsgHandler(HandleInputDel handler)
     {
         handlePrivateMessage += handler;
     }
 
     public void Write(Data data)
     {
-        ConnectionController.Write(data, client);
+        ConnectionControllerNew.Write(data, client);
     }
 }

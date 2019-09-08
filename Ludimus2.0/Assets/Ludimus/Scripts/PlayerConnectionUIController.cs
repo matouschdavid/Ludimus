@@ -18,12 +18,12 @@ public class PlayerConnectionUIController : MonoBehaviour
         server.AttachConnectedHandler(NewPlayerConnected);
     }
 
-    private void NewPlayerConnected(Connection connection, PlayerController player)
+    private void NewPlayerConnected(ConnectionNew connection, PlayerController player)
     {
         //Add to list
         GameObject g = Instantiate(playerUI, list);
         g.GetComponent<PlayerUI>().SetUp(Color.blue, connection.Playername);
-        playersText.text = ConnectionController.connectedClients.Count + " / 8 players connected";
+        playersText.text = ConnectionControllerNew.connectedClients.Count + " / 8 players connected";
     }
 
     // Update is called once per frame

@@ -2,19 +2,19 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using static Connection;
 using static ConnectionController;
+using static ConnectionNew;
 
 public class ControllerBase : MonoBehaviour
 {
     private bool isServer = false;
     private Queue<Data> handleInputQ = new Queue<Data>();
-    private Queue<Connection> newConnectionQ = new Queue<Connection>();
+    private Queue<ConnectionNew> newConnectionQ = new Queue<ConnectionNew>();
     private HandleInputDel privateMsgHandler;
     private HandleInputDel publicMsgHandler;
-    private ConnectionController.NewConnectionDel connectedHandler;
+    private ConnectionControllerNew.NewConnectionDel connectedHandler;
     private NewConnectionDel newConnectionHandler;
-    public delegate void NewConnectionDel(Connection connection, PlayerController player);
+    public delegate void NewConnectionDel(ConnectionNew connection, PlayerController player);
     private GameObject player;
 
 
@@ -37,7 +37,7 @@ public class ControllerBase : MonoBehaviour
         }
     }
 
-    private void NewConnectionQueue(Connection connection)
+    private void NewConnectionQueue(ConnectionNew connection)
     {
         var p = Instantiate(player);
         p.GetComponent<PlayerController>().SetUp(connection, HandleInput);
@@ -49,10 +49,10 @@ public class ControllerBase : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        ConnectionController.TeardownClient();
+        ConnectionControllerNew.TeardownClient();
     }
 
-    private void NewConnection(Connection connection)
+    private void NewConnection(ConnectionNew connection)
     {
         newConnectionQ.Enqueue(connection);
     }
@@ -81,9 +81,9 @@ public class ControllerBase : MonoBehaviour
     public void Write(Data data)
     {
         if (isServer)
-            ConnectionController.Write(data);
+            ConnectionControllerNew.Write(data);
         else
-            ConnectionController.Write(data, ConnectionController.Client);
+            ConnectionControllerNew.Write(data, ConnectionControllerNew.Client);
     }
 
     public void AttachMsgHandler(HandleInputDel handler)
@@ -99,7 +99,7 @@ public class ControllerBase : MonoBehaviour
         newConnectionHandler += handler;
     }
 
-    public void AttachConnectedHandler(ConnectionController.NewConnectionDel handler)
+    public void AttachConnectedHandler(ConnectionControllerNew.NewConnectionDel handler)
     {
         connectedHandler += handler;
     }
@@ -108,7 +108,7 @@ public class ControllerBase : MonoBehaviour
     public void Connect(string playername)
     {
         isServer = false;
-        ConnectionController.Connect(HandleInput, connectedHandler, playername);
+        ConnectionControllerNew.Connect(HandleInput, connectedHandler, playername);
     }
     #endregion
     #region Server
@@ -116,8 +116,8 @@ public class ControllerBase : MonoBehaviour
     {
         isServer = true;
         player = p;
-        ConnectionController.StartServer();
-        ConnectionController.AttachConnectionHandler(NewConnection);
+        ConnectionControllerNew.StartServer();
+        ConnectionControllerNew.AttachConnectionHandler(NewConnection);
     }
     #endregion
 }

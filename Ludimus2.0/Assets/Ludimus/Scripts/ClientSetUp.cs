@@ -29,7 +29,7 @@ public class ClientSetUp : MonoBehaviour
         client.Connect(playername);
     }
 
-    private void PlayerConnected(Connection connection, PlayerController player)
+    private void PlayerConnected(ConnectionNew connection, PlayerController player)
     {
         Debug.Log("Connected");
         SceneManager.LoadScene("ClientConnected", LoadSceneMode.Single);
