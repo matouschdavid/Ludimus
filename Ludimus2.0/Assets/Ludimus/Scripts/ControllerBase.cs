@@ -49,7 +49,10 @@ public class ControllerBase : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        ConnectionControllerNew.TeardownClient();
+        if (isServer)
+            ConnectionControllerNew.TeardownServer();
+        else
+            ConnectionControllerNew.TeardownClient();
     }
 
     private void NewConnection(ConnectionNew connection)
@@ -114,6 +117,7 @@ public class ControllerBase : MonoBehaviour
     #region Server
     public void StartServer(GameObject p)
     {
+        Debug.Log("Start server");
         isServer = true;
         player = p;
         ConnectionControllerNew.StartServer();

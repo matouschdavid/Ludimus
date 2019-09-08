@@ -13,7 +13,7 @@ public class ConnectionControllerNew : MonoBehaviour
 {
     public static bool IsServer = false;
     private static Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-    private static Thread waitForPlayers;
+    // private static Thread waitForPlayers;
     public static ConnectionNew Client;
     public static List<ConnectionNew> connectedClients;
     private static int currClientId = 0;
@@ -38,6 +38,7 @@ public class ConnectionControllerNew : MonoBehaviour
 
     private static void AcceptCallback(IAsyncResult ar)
     {
+        Debug.Log("Accept new client");
         Socket socket;
         try
         {
@@ -96,7 +97,6 @@ public class ConnectionControllerNew : MonoBehaviour
 
     public static void TeardownServer()
     {
-        waitForPlayers.Interrupt();
         foreach (ConnectionNew socket in connectedClients)
         {
             socket.Client.Shutdown(SocketShutdown.Both);
@@ -118,6 +118,17 @@ public class ConnectionControllerNew : MonoBehaviour
 
     public static void Connect(HandleInputDel handleInput, NewConnectionDel newConnectionHandler, string playername)
     {
+        Thread t = new Thread(new ParameterizedThreadStart(LookForConnection));
+        List<object> p = new List<object> { handleInput, newConnectionHandler };
+        t.Start(p);
+
+    }
+
+    private static void LookForConnection(object obj)
+    {
+        var p = (List<object>)obj;
+        var handleInput = (HandleInputDel)p[0];
+        var newConnectionHandler = (NewConnectionDel)p[1];
         Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
         int attempts = 0;
         while (!client.Connected)
