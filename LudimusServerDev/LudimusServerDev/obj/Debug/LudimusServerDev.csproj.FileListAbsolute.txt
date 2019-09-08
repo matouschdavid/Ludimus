@@ -5,3 +5,10 @@ C:\Users\campdav\Documents\LudimusGit\LudimusServerDev\LudimusServerDev\obj\Debu
 C:\Users\campdav\Documents\LudimusGit\LudimusServerDev\LudimusServerDev\obj\Debug\LudimusServerDev.csproj.CoreCompileInputs.cache
 C:\Users\campdav\Documents\LudimusGit\LudimusServerDev\LudimusServerDev\obj\Debug\LudimusServerDev.exe
 C:\Users\campdav\Documents\LudimusGit\LudimusServerDev\LudimusServerDev\obj\Debug\LudimusServerDev.pdb
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusServerDev\bin\Debug\LudimusServerDev.exe.config
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusServerDev\bin\Debug\LudimusServerDev.exe
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusServerDev\bin\Debug\LudimusServerDev.pdb
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusServerDev\obj\Debug\LudimusServerDev.csprojAssemblyReference.cache
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusServerDev\obj\Debug\LudimusServerDev.csproj.CoreCompileInputs.cache
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusServerDev\obj\Debug\LudimusServerDev.exe
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusServerDev\obj\Debug\LudimusServerDev.pdb

@@ -11,16 +11,16 @@ namespace LudimusServerDev
         static void Main(string[] args)
         {
             Console.WriteLine("Starting server");
-            ConnectionController.StartServer();
+            ConnectionController.StartServer(MessageCallback);
             ConnectionController.AttachConnectionHandler(ConnectedCallback);
-            ConnectionController.AttachMsgHandler(MessageCallback);
+            //ConnectionController.AttachMsgHandler(MessageCallback);
             Console.ReadKey();
         }
 
-        private static void MessageCallback(Data data)
+        private static void MessageCallback(Data data, Connection connection)
         {
             Console.WriteLine("Got message: " + data);
-            ConnectionController.Write(new Data { Key = "Test", Value = "Got message: " + data });
+            ConnectionController.Write(new Data { Key = "FromServerToClient", Value = "Got message: " + data });
         }
 
         private static void ConnectedCallback(Connection connection)

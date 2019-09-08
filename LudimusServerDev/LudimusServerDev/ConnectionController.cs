@@ -26,13 +26,15 @@ namespace LudimusServerDev
 
 
         public delegate void NewConnectionDel(Connection connection);
+        public delegate void MessageDel(Data data, Connection connection);
+        private static MessageDel messageDel;
 
 
         private static NewConnectionDel handleNewConnection;
 
-        public static void StartServer()
+        public static void StartServer(MessageDel m)
         {
-            
+            messageDel = m;
             server.Bind(new IPEndPoint(IPAddress.Any, 8080));
             server.Listen(0);
             server.BeginAccept(AcceptCallback, null);
@@ -56,6 +58,7 @@ namespace LudimusServerDev
                 Client = socket,
                 ClientId = currClientId
             };
+            conn.HandleInput = messageDel;
             connectedClients.Add(conn);
             conn.Client.BeginReceive(buffer, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCallBack, socket);
 
@@ -67,7 +70,11 @@ namespace LudimusServerDev
         {
             Socket current = (Socket)ar.AsyncState;
             int received = 0;
-            var conn = connectedClients.Find(c => c.Client == current);
+            Connection conn;
+            if (IsServer)
+                conn = connectedClients.Find(c => c.Client == current);
+            else
+                conn = Client;
             try
             {
                 received = current.EndReceive(ar);
@@ -89,7 +96,7 @@ namespace LudimusServerDev
                 //NewPlayer(d.Value, conn);
             }
             if (conn.HandleInput == null) return;
-            conn.HandleInput.Invoke(d);
+            conn.HandleInput.Invoke(d, conn);
 
             //Wait for next Message
             current.BeginReceive(buffer, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCallBack, current);
@@ -116,7 +123,7 @@ namespace LudimusServerDev
             handleNewConnection += handler;
         }
 
-        public static void Connect(HandleInputDel handleInput, NewConnectionDel newConnectionHandler, string playername)
+        public static void Connect(MessageDel handleInput, NewConnectionDel newConnectionHandler, string playername)
         {
             
             Thread t = new Thread(new ParameterizedThreadStart(LookForConnection));
@@ -128,7 +135,7 @@ namespace LudimusServerDev
         private static void LookForConnection(object obj)
         {
             var p = (List<object>)obj;
-            var handleInput = (HandleInputDel)p[0];
+            var handleInput = (MessageDel)p[0];
             var newConnectionHandler = (NewConnectionDel)p[1];
             Socket client = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
             int attempts = 0;
@@ -154,7 +161,7 @@ namespace LudimusServerDev
             newConnectionHandler.Invoke(Client);
         }
 
-        public static void AttachMsgHandler(Connection.HandleInputDel handler)
+        public static void AttachMsgHandler(MessageDel handler)
         {
             Client.HandleInput += handler;
         }

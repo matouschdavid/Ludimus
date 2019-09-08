@@ -9,3 +9,14 @@ C:\Users\campdav\Documents\LudimusGit\LudimusServerDev\LudimusClientDeb\obj\Debu
 C:\Users\campdav\Documents\LudimusGit\LudimusServerDev\LudimusClientDeb\obj\Debug\LudimusClientDev.csproj.CopyComplete
 C:\Users\campdav\Documents\LudimusGit\LudimusServerDev\LudimusClientDeb\obj\Debug\LudimusClientDeb.exe
 C:\Users\campdav\Documents\LudimusGit\LudimusServerDev\LudimusClientDeb\obj\Debug\LudimusClientDeb.pdb
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusClientDeb\bin\Debug\LudimusClientDeb.exe.config
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusClientDeb\bin\Debug\LudimusClientDeb.exe
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusClientDeb\bin\Debug\LudimusClientDeb.pdb
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusClientDeb\bin\Debug\LudimusServerDev.exe
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusClientDeb\bin\Debug\LudimusServerDev.pdb
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusClientDeb\bin\Debug\LudimusServerDev.exe.config
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusClientDeb\obj\Debug\LudimusClientDev.csprojAssemblyReference.cache
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusClientDeb\obj\Debug\LudimusClientDev.csproj.CoreCompileInputs.cache
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusClientDeb\obj\Debug\LudimusClientDev.csproj.CopyComplete
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusClientDeb\obj\Debug\LudimusClientDeb.exe
+C:\Users\campdav\Documents\LudimusGit\Ludimus\LudimusServerDev\LudimusClientDeb\obj\Debug\LudimusClientDeb.pdb
