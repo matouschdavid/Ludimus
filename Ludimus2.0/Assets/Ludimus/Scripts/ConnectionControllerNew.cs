@@ -9,7 +9,7 @@ using System.Threading;
 using UnityEngine;
 using static ConnectionNew;
 
-public class ConnectionControllerNew : MonoBehaviour
+public static class ConnectionControllerNew
 {
     public static bool IsServer = false;
     private static Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);

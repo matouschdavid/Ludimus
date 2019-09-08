@@ -6,7 +6,7 @@ using System.Net.Sockets;
 using System.Threading;
 using UnityEngine;
 
-public class ConnectionController : MonoBehaviour
+public static class ConnectionController
 {
     // public static bool IsServer = false;
     // private static TcpListener server;

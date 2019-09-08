@@ -1,4 +1,4 @@
 sceneSetups:
-- path: Assets/Ludimus/Scenes/ClientLoggedIn.unity
+- path: Assets/Ludimus/Scenes/Server.unity
   isLoaded: 1
   isActive: 1
