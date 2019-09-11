@@ -19,22 +19,26 @@ public class GameStartController : MonoBehaviour
     {
         if (data.Key == "Startgame")
         {
+            Debug.Log("Load client");
             SceneManager.LoadScene(data.Value + (ConnectionController.IsServer ? "_Server" : "_Client"), LoadSceneMode.Single);
             if (!ConnectionController.IsServer)
             {
+                Debug.Log("Send loaded");
                 ConnectionController.Write("Loaded", data.Value);
             }
         }
         if (data.Key == "GameToStart")
         {
+            Debug.Log("Got game " + data.Value);
             ConnectionController.Write("Startgame", data.Value, "Public");
-            (controller as ServerConnection).WaitForGroupAction("Loaded", EveryClientLoaded);
+            (controller as ServerConnection).WaitForGroupAction("Loaded", data.Value, EveryClientLoaded);
         }
     }
 
-    private void EveryClientLoaded(Data d)
+    private void EveryClientLoaded(string d)
     {
-        SceneManager.LoadScene(d.Value + "_Server", LoadSceneMode.Single);
+        Debug.Log("Every client loaded " + d);
+        SceneManager.LoadScene(d + "_Server", LoadSceneMode.Single);
     }
 
     // Update is called once per frame
@@ -47,10 +51,12 @@ public class GameStartController : MonoBehaviour
     public void ChangeGamename(string gamename)
     {
         this.gamename = gamename;
+        Startgame();
     }
 
     public void Startgame()
     {
+        Debug.Log("Startgame " + gamename);
         ConnectionController.Write("GameToStart", gamename);
     }
     #endregion

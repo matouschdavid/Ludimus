@@ -14,4 +14,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ludimus/Scenes/ClientConnected.unity
     guid: 1ca44c3529513b04089b2eaedaa95d42
+  - enabled: 1
+    path: Assets/Ludimus/Games/TestGame1/TestGame1_Client.unity
+    guid: 0d449abbd0a8d344f932166c42147972
+  - enabled: 1
+    path: Assets/Ludimus/Games/TestGame1/TestGame1_Server.unity
+    guid: 155bd1681d76c814e8ac83bbcf2dae5f
   m_configObjects: {}

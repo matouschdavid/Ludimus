@@ -7,10 +7,10 @@ using static ConnectionController;
 public class ServerConnection : ControllerBase
 {
 
-    public delegate void WaitForGroupActionDel(Data d);
+    public delegate void WaitForGroupActionDel(string d);
     private Queue<Connection> playernameChangeQueue = new Queue<Connection>();
 
-    private Dictionary<string, (int, WaitForGroupActionDel, List<Connection>, Data)> groupActions = new Dictionary<string, (int, WaitForGroupActionDel, List<Connection>, Data)>();
+    private Dictionary<string, (int, WaitForGroupActionDel, List<Connection>, string)> groupActions = new Dictionary<string, (int, WaitForGroupActionDel, List<Connection>, string)>();
 
     void LateUpdate()
     {
@@ -44,10 +44,11 @@ public class ServerConnection : ControllerBase
         if (groupActions.ContainsKey(data.Key))
         {
             groupActions[data.Key].Item3.Add(connection);
-            groupActions[data.Key].Item4.Key = data.Key;
-            groupActions[data.Key].Item4.Value = data.Value;
         }
-        messageQueue.Enqueue((data, connection));
+        else
+        {
+            messageQueue.Enqueue((data, connection));
+        }
     }
 
     private void PlayernameChangedCallback(Connection c)
@@ -61,10 +62,10 @@ public class ServerConnection : ControllerBase
         c.PlayerUI = playerUI;
     }
 
-    public void WaitForGroupAction(string keyToLookOutFor, WaitForGroupActionDel callback, int minPlayers = -1)
+    public void WaitForGroupAction(string keyToLookOutFor, string value, WaitForGroupActionDel callback, int minPlayers = -1)
     {
         if (minPlayers < 0)
             minPlayers = ConnectionController.connectedClients.Count;
-        groupActions.Add(keyToLookOutFor, (minPlayers, callback, new List<Connection>(), new Data()));
+        groupActions.Add(keyToLookOutFor, (minPlayers, callback, new List<Connection>(), value));
     }
 }
