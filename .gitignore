@@ -3,6 +3,7 @@
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore
 #
 /Ludimus2.0/[Ll]ibrary/
+Ludimus2.0/[Ll]ibrary/
 /Ludimus2.0/[Tt]emp/
 /Ludimus2.0/[Oo]bj/
 /Ludimus2.0/[Bb]uild/
