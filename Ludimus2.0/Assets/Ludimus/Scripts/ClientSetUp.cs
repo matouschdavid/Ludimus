@@ -6,14 +6,14 @@ using UnityEngine.SceneManagement;
 
 public class ClientSetUp : MonoBehaviour
 {
-    ControllerBase client;
+    ClientConnection client;
     private string playername;
     private string lobbycode;
 
     // Start is called before the first frame update
     void Start()
     {
-        client = GetComponent<ControllerBase>();
+        client = GetComponent<ClientConnection>();
     }
 
     // Update is called once per frame
@@ -24,12 +24,10 @@ public class ClientSetUp : MonoBehaviour
 
     public void Connect()
     {
-        Debug.Log("Connect");
-        client.AttachConnectedHandler(PlayerConnected);
-        client.Connect(playername);
+        client.Connect(lobbycode, playername, null, PlayerConnected);
     }
 
-    private void PlayerConnected(ConnectionNew connection, PlayerController player)
+    private void PlayerConnected(Connection connection)
     {
         Debug.Log("Connected");
         SceneManager.LoadScene("ClientConnected", LoadSceneMode.Single);

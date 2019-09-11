@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PlayerConnectionUIController : MonoBehaviour
 {
-    private ControllerBase server;
+    private ServerConnection server;
     public GameObject playerUI;
     public Transform list;
 
@@ -14,16 +14,18 @@ public class PlayerConnectionUIController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        server = GameObject.Find("Controller").GetComponent<ControllerBase>();
-        server.AttachConnectedHandler(NewPlayerConnected);
+        server = ConnectionController.GetControllerInstance<ServerConnection>();
+        server.AttachNewConnectionHandler(NewPlayerConnected);
     }
 
-    private void NewPlayerConnected(ConnectionNew connection, PlayerController player)
+    private void NewPlayerConnected(Connection connection)
     {
+        Debug.Log("create new playerUI");
         //Add to list
         GameObject g = Instantiate(playerUI, list);
         g.GetComponent<PlayerUI>().SetUp(Color.blue, connection.Playername);
-        playersText.text = ConnectionControllerNew.connectedClients.Count + " / 8 players connected";
+        playersText.text = ConnectionController.connectedClients.Count + " / 8 players connected";
+        server.AddPlayerUIRef(g.GetComponent<PlayerUI>(), connection);
     }
 
     // Update is called once per frame

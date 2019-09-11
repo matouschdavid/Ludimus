@@ -4,18 +4,24 @@ using UnityEngine;
 
 public class ServerSetUp : MonoBehaviour
 {
-    ControllerBase server;
+    ServerConnection server;
     public GameObject player;
     // Start is called before the first frame update
     void Start()
     {
-        server = GetComponent<ControllerBase>();
-        server.StartServer(player);
+        server = GetComponent<ServerConnection>();
+        server.StartServer(MessageCallback, ConnectedCallback);
     }
 
-    // Update is called once per frame
-    void Update()
+    private void MessageCallback(Data data, Connection connection)
     {
+        Debug.Log("Got message: " + data);
+        ConnectionController.Write(new Data { Key = "FromServerToClient", Value = "Got message: " + data });
+    }
 
+    private void ConnectedCallback(Connection connection)
+    {
+        Debug.Log("New Player connected");
+        GameObject p = Instantiate(player);
     }
 }
