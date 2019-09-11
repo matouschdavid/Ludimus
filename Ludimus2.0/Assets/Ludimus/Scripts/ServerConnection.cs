@@ -24,6 +24,7 @@ public class ServerConnection : ControllerBase
         {
             item.Value.Item2.Invoke(item.Value.Item4);
             groupActions.Remove(item.Key);
+            break;
         }
     }
     public void StartServer(MessageDel MessageCallback, NewConnectionDel ConnectedCallback)

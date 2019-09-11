@@ -22,6 +22,7 @@ public class TestGame1_WritingController : MonoBehaviour
         if (data.Key == "Message")
         {
             text.text += "\n" + connection.Playername + ": " + data.Value;
+            ConnectionController.Write(connection, "Received", "true");
         }
 
     }
