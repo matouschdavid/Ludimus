@@ -27,7 +27,7 @@ public class LobbyCodeController : MonoBehaviour
         }
         var b = BitConverter.GetBytes((int)IPAddress.Parse(localIp).Address);
         string lobbyCode = Convert.ToBase64String(b).Split('=')[0];
-        this.lobbyCode.text = "Lobbycode: " + lobbyCode;
+        this.lobbyCode.text = lobbyCode;
         qrCode.texture = generateQR(lobbyCode);
     }
 

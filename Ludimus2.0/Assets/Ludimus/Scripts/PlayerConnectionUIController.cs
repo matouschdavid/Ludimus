@@ -23,7 +23,7 @@ public class PlayerConnectionUIController : MonoBehaviour
         Debug.Log("create new playerUI");
         //Add to list
         GameObject g = Instantiate(playerUI, list);
-        g.GetComponent<PlayerUI>().SetUp(Color.blue, connection.Playername);
+        g.GetComponent<PlayerUI>().SetUp(connection.Playername);
         playersText.text = ConnectionController.connectedClients.Count + " / 8 players connected";
         server.AddPlayerUIRef(g.GetComponent<PlayerUI>(), connection);
     }
