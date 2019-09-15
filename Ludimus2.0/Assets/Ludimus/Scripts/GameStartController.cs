@@ -21,6 +21,7 @@ public class GameStartController : MonoBehaviour
         {
             Debug.Log("Load client");
             SceneManager.LoadScene(data.Value + (ConnectionController.IsServer ? "_Server" : "_Client"), LoadSceneMode.Single);
+            SceneManager.LoadScene("PauseOverlay_Client", LoadSceneMode.Additive);
             if (!ConnectionController.IsServer)
             {
                 Debug.Log("Send loaded");
@@ -38,6 +39,7 @@ public class GameStartController : MonoBehaviour
     private void EveryClientLoaded(string d)
     {
         Debug.Log("Every client loaded " + d);
+        SceneManager.UnloadSceneAsync("PauseOverlay_Server");
         SceneManager.LoadScene(d + "_Server", LoadSceneMode.Single);
     }
 

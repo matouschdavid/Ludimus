@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ServerSetUp : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class ServerSetUp : MonoBehaviour
     {
         server = GetComponent<ServerConnection>();
         server.StartServer(MessageCallback, ConnectedCallback);
+        SceneManager.LoadScene("PauseOverlay_Server", LoadSceneMode.Additive);
     }
 
     private void MessageCallback(Data data, Connection connection)

@@ -185,9 +185,10 @@ public static class ConnectionController
 
     public static void Write(Data data, Connection c)
     {
-        Debug.Log("Write...");
+        Debug.Log("Write... " + data.ToString());
         var bytes = System.Text.Encoding.ASCII.GetBytes(Data.ConvertFromData(data));
         c.Client.Send(bytes, 0, bytes.Length, SocketFlags.None);
+        c.Client.NoDelay = true;
     }
 
     public static void Write(Data data)
