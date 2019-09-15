@@ -43,4 +43,9 @@ public class ClientPauseController : MonoBehaviour
     {
         ConnectionController.Write("EndPause", "");
     }
+
+    public void BackToLobby()
+    {
+        ConnectionController.Write("Endgame", "");
+    }
 }

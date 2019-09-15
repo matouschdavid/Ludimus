@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class ClientSetUp : MonoBehaviour
 {
     ClientConnection client;
+    public TMP_InputField nameT;
+    public TMP_InputField lobbyCT;
     private string playername;
     private string lobbycode;
 
@@ -14,6 +17,8 @@ public class ClientSetUp : MonoBehaviour
     void Start()
     {
         client = GetComponent<ClientConnection>();
+        nameT.text = PlayerPrefs.GetString("Playername", "");
+        lobbyCT.text = PlayerPrefs.GetString("Lobbycode", "");
     }
 
     // Update is called once per frame
@@ -36,10 +41,12 @@ public class ClientSetUp : MonoBehaviour
     public void OnPlayerNameChanged(string s)
     {
         playername = s;
+        PlayerPrefs.SetString("Playername", playername);
     }
 
     public void OnLobbyCodeChanged(string s)
     {
         lobbycode = s;
+        PlayerPrefs.SetString("Lobbycode", lobbycode);
     }
 }

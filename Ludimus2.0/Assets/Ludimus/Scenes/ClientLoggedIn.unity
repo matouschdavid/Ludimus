@@ -2008,6 +2008,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b0163c8d7627948bc827e4111e778b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  nameT: {fileID: 1382298156}
+  lobbyCT: {fileID: 1964892019}
 --- !u!114 &1801634894
 MonoBehaviour:
   m_ObjectHideFlags: 0

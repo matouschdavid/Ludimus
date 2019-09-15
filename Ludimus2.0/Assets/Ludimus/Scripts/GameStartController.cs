@@ -1,16 +1,23 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GameStartController : MonoBehaviour
 {
     private string gamename;
+    public TMP_InputField gameNameT;
     private ControllerBase controller;
     // Start is called before the first frame update
     void Start()
     {
+        if (!ConnectionController.IsServer)
+        {
+            this.gamename = PlayerPrefs.GetString("Gamename", "");
+            gameNameT.text = this.gamename;
+        }
         controller = ConnectionController.GetControllerInstance<ControllerBase>();
         controller.AttachMessageHandler(MessageCallback);
     }
@@ -20,13 +27,11 @@ public class GameStartController : MonoBehaviour
         if (data.Key == "Startgame")
         {
             Debug.Log("Load client");
-            SceneManager.LoadScene(data.Value + (ConnectionController.IsServer ? "_Server" : "_Client"), LoadSceneMode.Single);
+            SceneManager.LoadScene(data.Value + "_Client", LoadSceneMode.Single);
+
             SceneManager.LoadScene("PauseOverlay_Client", LoadSceneMode.Additive);
-            if (!ConnectionController.IsServer)
-            {
-                Debug.Log("Send loaded");
-                ConnectionController.Write("Loaded", data.Value);
-            }
+            Debug.Log("Send loaded");
+            ConnectionController.Write("Loaded", data.Value);
         }
         if (data.Key == "GameToStart")
         {
@@ -34,13 +39,26 @@ public class GameStartController : MonoBehaviour
             ConnectionController.Write("Startgame", data.Value, "Public");
             (controller as ServerConnection).WaitForGroupAction("Loaded", data.Value, EveryClientLoaded);
         }
+        else if (data.Key == "Endgame")
+        {
+            if (ConnectionController.IsServer)
+            {
+
+                GameObject.Find("PauseController").GetComponent<ServerPauseController>().EndGame();
+                ConnectionController.Write("Endgame", "");
+            }
+            else
+            {
+                SceneManager.LoadScene("ClientConnected", LoadSceneMode.Single);
+            }
+        }
     }
 
     private void EveryClientLoaded(string d)
     {
         Debug.Log("Every client loaded " + d);
-        SceneManager.UnloadSceneAsync("PauseOverlay_Server");
-        SceneManager.LoadScene(d + "_Server", LoadSceneMode.Single);
+        GameObject.Find("PauseController").GetComponent<ServerPauseController>().StartGame(d);
+        SceneManager.LoadScene(d + "_Server", LoadSceneMode.Additive);
     }
 
     // Update is called once per frame
@@ -53,7 +71,7 @@ public class GameStartController : MonoBehaviour
     public void ChangeGamename(string gamename)
     {
         this.gamename = gamename;
-        Startgame();
+        PlayerPrefs.SetString("Gamename", this.gamename);
     }
 
     public void Startgame()
