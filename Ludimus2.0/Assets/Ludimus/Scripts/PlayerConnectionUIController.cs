@@ -11,6 +11,7 @@ public class PlayerConnectionUIController : MonoBehaviour
     public Transform list;
 
     public TextMeshProUGUI playersText;
+    public TextMeshProUGUI bigPlayersText;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,7 +25,8 @@ public class PlayerConnectionUIController : MonoBehaviour
         //Add to list
         GameObject g = Instantiate(playerUI, list);
         g.GetComponent<PlayerUI>().SetUp(connection.Playername);
-        playersText.text = ConnectionController.connectedClients.Count + " / 8 players connected";
+        playersText.text = ConnectionController.connectedClients.Count.ToString();
+        bigPlayersText.text = ConnectionController.connectedClients.Count.ToString();
         server.AddPlayerUIRef(g.GetComponent<PlayerUI>(), connection);
     }
 

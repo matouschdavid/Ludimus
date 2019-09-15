@@ -16,7 +16,7 @@ public class ServerSetUp : MonoBehaviour
     private void MessageCallback(Data data, Connection connection)
     {
         Debug.Log("Got message: " + data);
-        ConnectionController.Write(new Data { Key = "FromServerToClient", Value = "Got message: " + data });
+        // ConnectionController.Write(new Data { Key = "FromServerToClient", Value = "Got message: " + data });
     }
 
     private void ConnectedCallback(Connection connection)

@@ -1192,7 +1192,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 3
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0c9f14b282d663647b98b15cf6379f7f, type: 2}
   m_sharedMaterial: {fileID: 21619142867850290, guid: 0c9f14b282d663647b98b15cf6379f7f,
@@ -1662,7 +1662,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_text: 3
+  m_text: 0
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 0c9f14b282d663647b98b15cf6379f7f, type: 2}
   m_sharedMaterial: {fileID: 21619142867850290, guid: 0c9f14b282d663647b98b15cf6379f7f,
@@ -1983,6 +1983,7 @@ MonoBehaviour:
     type: 3}
   list: {fileID: 1803268897}
   playersText: {fileID: 1561960585}
+  bigPlayersText: {fileID: 1395512639}
 --- !u!4 &1875860555
 Transform:
   m_ObjectHideFlags: 0

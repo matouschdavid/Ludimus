@@ -1,9 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static ConnectionController;
 
 public class PlayerController : MonoBehaviour
 {
+    protected Connection client;
+
+    public virtual void SetUp(Connection c)
+    {
+        client = c;
+    }
+
     // private HandleInputDel handlePublicMessage;
 
     // private Queue<Data> handleInputQ = new Queue<Data>();
