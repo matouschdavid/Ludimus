@@ -9,9 +9,9 @@ public class PlayerConnectionUIController : MonoBehaviour
     private ServerConnection server;
     public GameObject playerUI;
     public Transform list;
+    public Color testColor;
 
     public TextMeshProUGUI playersText;
-    public TextMeshProUGUI bigPlayersText;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,9 +24,8 @@ public class PlayerConnectionUIController : MonoBehaviour
         Debug.Log("create new playerUI");
         //Add to list
         GameObject g = Instantiate(playerUI, list);
-        g.GetComponent<PlayerUI>().SetUp(connection.Playername);
+        g.GetComponent<PlayerUI>().SetUp(connection.Playername, testColor);
         playersText.text = ConnectionController.connectedClients.Count.ToString();
-        bigPlayersText.text = ConnectionController.connectedClients.Count.ToString();
         server.AddPlayerUIRef(g.GetComponent<PlayerUI>(), connection);
     }
 

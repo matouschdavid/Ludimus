@@ -19,6 +19,8 @@ public class ServerConnection : ControllerBase
             c.PlayerUI.UpdatePlayer(c.Playername);
         }
         var finished = groupActions.Where(a => a.Value.Item1 <= a.Value.Item3.Count).FirstOrDefault();
+        if (finished.Key == null)
+            return;
         finished.Value.Item2.Invoke(finished.Value.Item4);
         groupActions.Remove(finished.Key);
     }
