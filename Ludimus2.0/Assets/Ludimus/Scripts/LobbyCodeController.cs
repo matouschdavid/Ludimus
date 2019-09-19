@@ -41,6 +41,13 @@ public class LobbyCodeController : MonoBehaviour
     {
         var encoded = new Texture2D(256, 256);
         var color32 = Encode(text, encoded.width, encoded.height);
+        Color32 black = new Color32(0, 0, 0, 255);
+        Color32 newColor = new Color32(54, 66, 106, 255);
+        for (int i = 0; i < color32.Length; i++)
+        {
+            if (color32[i].CompareRGB(black))
+                color32[i] = newColor;
+        }
         encoded.SetPixels32(color32);
         encoded.Apply();
         return encoded;
