@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources tools:keep="@string/firebase_database_url,@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id,@string/default_web_client_id" xmlns:tools="http://schemas.android.com/tools">
+  <string name="firebase_database_url" translatable="false">https://ludimus-1b1db.firebaseio.com</string>
+  <string name="gcm_defaultSenderId" translatable="false">465656446944</string>
+  <string name="google_storage_bucket" translatable="false">ludimus-1b1db.appspot.com</string>
+  <string name="project_id" translatable="false">ludimus-1b1db</string>
+  <string name="google_api_key" translatable="false">AIzaSyBLplyVNt1oA52HurOn0HbxaFo9JozzeTI</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyBLplyVNt1oA52HurOn0HbxaFo9JozzeTI</string>
+  <string name="google_app_id" translatable="false">1:465656446944:android:df79e194066909624ef585</string>
+  <string name="default_web_client_id" translatable="false">465656446944-d2vn6jk1duc09ho6k77m9mhvqeri15nt.apps.googleusercontent.com</string>
+</resources>

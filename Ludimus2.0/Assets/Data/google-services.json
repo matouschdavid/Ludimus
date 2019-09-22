@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "465656446944",
+    "firebase_url": "https://ludimus-1b1db.firebaseio.com",
+    "project_id": "ludimus-1b1db",
+    "storage_bucket": "ludimus-1b1db.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:465656446944:android:df79e194066909624ef585",
+        "android_client_info": {
+          "package_name": "com.Ludimus.Ludimus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "465656446944-d2vn6jk1duc09ho6k77m9mhvqeri15nt.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBLplyVNt1oA52HurOn0HbxaFo9JozzeTI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "465656446944-d2vn6jk1duc09ho6k77m9mhvqeri15nt.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "465656446944-3rh2d463t7a7jbj5e7gosf2tuq5n02tg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.Ludimus.Ludimus"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

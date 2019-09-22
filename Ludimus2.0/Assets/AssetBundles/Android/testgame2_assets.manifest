@@ -1,0 +1,43 @@
+ManifestFileVersion: 0
+CRC: 1945339849
+Hashes:
+  AssetFileHash:
+    serializedVersion: 2
+    Hash: d9f400ee268d02f64b8b3a44556b9e03
+  TypeTreeHash:
+    serializedVersion: 2
+    Hash: 1a77e0e6d953e230c9843d39c2f6e022
+HashAppended: 0
+ClassTypes:
+- Class: 1
+  Script: {instanceID: 0}
+- Class: 4
+  Script: {instanceID: 0}
+- Class: 21
+  Script: {instanceID: 0}
+- Class: 23
+  Script: {instanceID: 0}
+- Class: 28
+  Script: {instanceID: 0}
+- Class: 33
+  Script: {instanceID: 0}
+- Class: 43
+  Script: {instanceID: 0}
+- Class: 48
+  Script: {instanceID: 0}
+- Class: 54
+  Script: {instanceID: 0}
+- Class: 65
+  Script: {instanceID: 0}
+- Class: 102
+  Script: {instanceID: 0}
+- Class: 114
+  Script: {fileID: 11500000, guid: 5252e7cc47608024e8a9854dec5cb218, type: 3}
+- Class: 115
+  Script: {instanceID: 0}
+- Class: 128
+  Script: {instanceID: 0}
+Assets:
+- Assets/Ludimus/Games/TestGame2/Player.prefab
+- Assets/Ludimus/Games/TestGame2/PlayerMat.mat
+Dependencies: []

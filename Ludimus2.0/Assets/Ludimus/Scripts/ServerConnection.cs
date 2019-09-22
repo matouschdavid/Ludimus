@@ -65,6 +65,8 @@ public class ServerConnection : ControllerBase
         if (minPlayers < 0)
             minPlayers = ConnectionController.connectedClients.Count;
         Debug.Log("New Group action with " + minPlayers + " players to accept");
+        if (groupActions.ContainsKey(keyToLookOutFor))
+            groupActions.Remove(keyToLookOutFor);
         groupActions.Add(keyToLookOutFor, (minPlayers, callback, new List<Connection>(), value));
     }
 }

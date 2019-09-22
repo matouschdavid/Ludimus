@@ -5,7 +5,7 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 0
+  - enabled: 1
     path: Assets/Ludimus/Scenes/Server.unity
     guid: 08eaee4a778f42b498955dedaf8da995
   - enabled: 1
@@ -20,4 +20,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ludimus/Games/TestGame1/TestGame1_Server.unity
     guid: 155bd1681d76c814e8ac83bbcf2dae5f
+  - enabled: 1
+    path: Assets/Ludimus/Scenes/PauseOverlay_Server.unity
+    guid: 8f392bb997a64de489df79c6977cf61d
+  - enabled: 1
+    path: Assets/Ludimus/Scenes/PauseOverlay_Client.unity
+    guid: 06a0c81553b88b04f812c1c35b0a3ee0
   m_configObjects: {}

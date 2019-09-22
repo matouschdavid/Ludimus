@@ -1,0 +1,10 @@
+ManifestFileVersion: 0
+CRC: 2185257644
+AssetBundleManifest:
+  AssetBundleInfos:
+    Info_0:
+      Name: testgame1_scenes
+      Dependencies: {}
+    Info_1:
+      Name: testgame1_assets
+      Dependencies: {}

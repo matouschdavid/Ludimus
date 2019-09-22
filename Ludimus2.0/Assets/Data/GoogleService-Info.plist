@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>465656446944-3rh2d463t7a7jbj5e7gosf2tuq5n02tg.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.465656446944-3rh2d463t7a7jbj5e7gosf2tuq5n02tg</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDrc-_AzG-6Q58Fmdov2mG7lobQQijJRc0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>465656446944</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.Ludimus.Ludimus</string>
+	<key>PROJECT_ID</key>
+	<string>ludimus-1b1db</string>
+	<key>STORAGE_BUCKET</key>
+	<string>ludimus-1b1db.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:465656446944:ios:64bf2e0f198fe28c4ef585</string>
+	<key>DATABASE_URL</key>
+	<string>https://ludimus-1b1db.firebaseio.com</string>
+</dict>
+</plist>
