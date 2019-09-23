@@ -1,5 +1,7 @@
 ﻿using Firebase;
+using Firebase.Database;
 using Firebase.Storage;
+using Firebase.Unity.Editor;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -115,14 +117,19 @@ public class LudimusEditorExtensions : EditorWindow
     }
 
     public int selected = 0;
+    public int minplayers = 0;
+    public int maxplayers = 8;
+    public int minage = 0;
+    public int maxage = 99;
+    public Texture2D icon;
+    public string gamename;
     private void OnGUI()
     {
         FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         {
             if (task.Result == DependencyStatus.Available)
             {
-
-                //FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://ludimus-82e6d.firebaseio.com/");
+                FirebaseApp.DefaultInstance.SetEditorDatabaseUrl("https://ludimus-1b1db.firebaseio.com/");
             }
             else
             {
@@ -137,8 +144,27 @@ public class LudimusEditorExtensions : EditorWindow
             string[] splitted = d.Split('/');
             return splitted[splitted.Length - 1];
         }).ToArray();
-        selected = EditorGUILayout.Popup("Which game to upload", selected, options);
-        if(GUILayout.Button("Select"))
+        selected = EditorGUILayout.Popup("Which files to upload", selected, options);
+        gamename = EditorGUILayout.TextField("Name: ", gamename);
+        EditorGUILayout.TextField("", "", new GUIStyle
+        {
+            active = new GUIStyleState()
+        });
+        minplayers = EditorGUILayout.IntSlider("Min. players: ",minplayers, 0, 8);
+        maxplayers = EditorGUILayout.IntSlider("Max. players: ", maxplayers, minplayers, 8);
+        EditorGUILayout.TextField("", "", new GUIStyle
+        {
+            active = new GUIStyleState()
+        });
+        minage = EditorGUILayout.IntSlider("Min. age: ", minage, 0, 99);
+        maxage = EditorGUILayout.IntSlider("Max. age: ", maxage, minage, 99);
+        EditorGUILayout.TextField("", "", new GUIStyle
+        {
+            active = new GUIStyleState()
+        });
+
+        icon = EditorGUILayout.ObjectField("Icon", icon, typeof(Texture2D), false) as Texture2D;
+        if (GUILayout.Button("Upload"))
             StartUploadingGame(options);
     }
 
@@ -194,25 +220,29 @@ public class LudimusEditorExtensions : EditorWindow
 
         string[] scriptsFullPath = Directory.GetFiles(gamesFolderPath, "*.cs", SearchOption.AllDirectories);
 
-
-
+        DatabaseReference reference = FirebaseDatabase.DefaultInstance.RootReference;
+        var id = reference.Push().Key;
         var storage = FirebaseStorage.DefaultInstance;
         var rootRef = storage.RootReference;
-        var gameRef = rootRef.Child("games/" + options[selected]);
+        var gameRef = rootRef.Child("games/" + id);
+        var iconFilePath = AssetDatabase.GetAssetPath(icon);
+        var new_metadata = new Firebase.Storage.MetadataChange();
+        new_metadata.ContentType = "image/jpeg";
+        var result = await gameRef.Child("icon" + Path.GetExtension(iconFilePath)).PutFileAsync(iconFilePath, new_metadata);
         foreach (var script in scriptsFullPath)
         {
             var res = await gameRef.Child("/" + Path.GetFileName(script)).PutFileAsync(script);
             UnityEngine.Debug.Log(res.Name + " is completed");
         }
-        var androidAssetBundels = rootRef.Child("games/" + options[selected] + "/AssetBundles/Android/");
-        foreach(var file in Directory.GetFiles("Assets/AssetBundles/Android"))
+        var androidAssetBundels = rootRef.Child("games/" + id + "/AssetBundles/Android/");
+        foreach (var file in Directory.GetFiles("Assets/AssetBundles/Android"))
         {
             if (Path.GetFileNameWithoutExtension(file).Contains(options[selected].ToLower()))
             {
                 var res = await androidAssetBundels.Child(Path.GetFileName(file)).PutFileAsync(file);
             }
         }
-        var windowsAssetBundels = rootRef.Child("games/" + options[selected] + "/AssetBundles/Windows/");
+        var windowsAssetBundels = rootRef.Child("games/" + id + "/AssetBundles/Windows/");
         foreach (var file in Directory.GetFiles("Assets/AssetBundles/Windows"))
         {
             if (Path.GetFileNameWithoutExtension(file).Contains(options[selected].ToLower()))
@@ -220,5 +250,11 @@ public class LudimusEditorExtensions : EditorWindow
                 var res = await windowsAssetBundels.Child(Path.GetFileName(file)).PutFileAsync(file);
             }
         }
+
+        
+        Game game = new Game(gamename, minplayers, maxplayers, minage, maxage, "games");
+        
+        await reference.Child("gamesInDevelopment/" + id).SetRawJsonValueAsync(JsonUtility.ToJson(game));
+        UnityEngine.Debug.Log("Game upload finished. To Access the game use " + id + " this key.\nIf this is your final build, you can publish your game with the publish button");
     }
 }

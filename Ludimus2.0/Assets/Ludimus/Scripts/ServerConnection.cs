@@ -43,10 +43,7 @@ public class ServerConnection : ControllerBase
         {
             groupActions[data.Key].Item3.Add(connection);
         }
-        else
-        {
-            messageQueue.Enqueue((data, connection));
-        }
+        messageQueue.Enqueue((data, connection));
     }
 
     private void PlayernameChangedCallback(Connection c)
