@@ -7,17 +7,10 @@ using UnityEngine.SceneManagement;
 
 public class GameStartController : MonoBehaviour
 {
-    private string gamename;
-    public TMP_InputField gameNameT;
     private ControllerBase controller;
     // Start is called before the first frame update
     void Start()
     {
-        if (!ConnectionController.IsServer)
-        {
-            this.gamename = PlayerPrefs.GetString("Gamename", "");
-            gameNameT.text = this.gamename;
-        }
         controller = ConnectionController.GetControllerInstance<ControllerBase>();
         controller.AttachMessageHandler(MessageCallback);
     }
@@ -49,7 +42,10 @@ public class GameStartController : MonoBehaviour
             }
             else
             {
-                SceneManager.LoadScene("ClientConnected", LoadSceneMode.Single);
+                if(connection.ClientId != 0)
+                    SceneManager.LoadScene("ClientConnected", LoadSceneMode.Single);
+                else
+                    SceneManager.LoadScene("ClientShop", LoadSceneMode.Single);
             }
         }
     }
@@ -60,24 +56,12 @@ public class GameStartController : MonoBehaviour
         GameObject.Find("PauseController").GetComponent<ServerPauseController>().StartGame(d);
         SceneManager.LoadScene(d + "_Server", LoadSceneMode.Additive);
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
-
     #region Client
-    public void ChangeGamename(string gamename)
-    {
-        this.gamename = gamename;
-        PlayerPrefs.SetString("Gamename", this.gamename);
-    }
 
-    public void Startgame()
+    public void Startgame(string game)
     {
-        Debug.Log("Startgame " + gamename);
-        ConnectionController.Write("GameToStart", gamename);
+        Debug.Log("Startgame " + game);
+        ConnectionController.Write("GameToStart", game);
     }
     #endregion
 }

@@ -15,6 +15,12 @@ public class TestGame1_WritingController : MonoBehaviour
         server.AttachMessageHandler(MessageCallback);
         ConnectionController.Write("WannaStart", "true");
         server.WaitForGroupAction("IWannaStart", "", EveryPlayerWantsToStart);
+        server.AttachPauseHandler(PauseCallback);
+    }
+
+    private void PauseCallback(bool isPaused)
+    {
+        Debug.Log("Game is paused: " + isPaused);
     }
 
     private void MessageCallback(Data data, Connection connection)

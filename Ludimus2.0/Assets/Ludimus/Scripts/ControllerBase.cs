@@ -6,9 +6,11 @@ public class ControllerBase : MonoBehaviour
 {
     protected NewConnectionDel newConnectionHandler;
     protected MessageDel messageHandler;
+    public delegate void PauseDel(bool isPaused);
 
     protected Queue<Connection> connectionQueue = new Queue<Connection>();
     protected Queue<(Data, Connection)> messageQueue = new Queue<(Data, Connection)>();
+    private PauseDel pauseHandler;
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +28,10 @@ public class ControllerBase : MonoBehaviour
         if (messageQueue.Count > 0)
         {
             var d = messageQueue.Dequeue();
-
+            if (d.Item1.Key == "StartPause")
+                pauseHandler(true);
+            else if (d.Item1.Key == "EndPause")
+                pauseHandler(false);
             messageHandler.Invoke(d.Item1, d.Item2);
         }
     }
@@ -35,7 +40,15 @@ public class ControllerBase : MonoBehaviour
 
 
 
+    public void AttachPauseHandler(PauseDel callback)
+    {
+        pauseHandler += callback;
+    }
 
+    public void DetachPauseHandler(PauseDel callback)
+    {
+        pauseHandler -= callback;
+    }
 
     public void AttachNewConnectionHandler(NewConnectionDel callback)
     {

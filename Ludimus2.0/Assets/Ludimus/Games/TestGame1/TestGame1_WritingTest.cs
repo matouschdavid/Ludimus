@@ -12,6 +12,12 @@ public class TestGame1_WritingTest : MonoBehaviour
     {
         client = ConnectionController.GetControllerInstance<ClientConnection>();
         client.AttachMessageHandler(MessageCallback);
+        client.AttachPauseHandler(PauseCallback);
+    }
+
+    private void PauseCallback(bool isPaused)
+    {
+        Debug.Log("Game is paused: " + isPaused);
     }
 
     private void MessageCallback(Data data, Connection connection)

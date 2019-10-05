@@ -14,28 +14,25 @@ public class ClientPauseController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ConnectionController.GetControllerInstance<ClientConnection>().AttachMessageHandler(MessageCallback);
+        ConnectionController.GetControllerInstance<ClientConnection>().AttachPauseHandler(PauseCallback);
     }
 
-    private void MessageCallback(Data data, Connection connection)
+    private void PauseCallback(bool isPaused)
     {
         if (inGameUI == null)
             inGameUI = GameObject.Find("inGameMode");
         if (inPauseUI == null)
             inPauseUI = GameObject.Find("inPauseMode");
-        if (data.Key == "StartPause")
+        if (isPaused)
         {
-            Debug.Log(data);
-            Debug.Log(connection);
-            Debug.Log(inGameUI);
-            Debug.Log(inPauseUI);
             inGameUI.GetComponent<Image>().color = OffColor;
             inPauseUI.GetComponent<Image>().color = OnColor;
         }
-        if (data.Key == "EndPause")
+        else
         {
             inGameUI.GetComponent<Image>().color = OnColor;
             inPauseUI.GetComponent<Image>().color = OffColor;
+
         }
     }
 

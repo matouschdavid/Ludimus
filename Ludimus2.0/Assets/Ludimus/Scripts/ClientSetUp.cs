@@ -35,7 +35,10 @@ public class ClientSetUp : MonoBehaviour
     private void PlayerConnected(Connection connection)
     {
         Debug.Log("Connected");
-        SceneManager.LoadScene("ClientConnected", LoadSceneMode.Single);
+        if (connection.ClientId != 0)
+            SceneManager.LoadScene("ClientConnected", LoadSceneMode.Single);
+        else
+            SceneManager.LoadScene("ClientShop", LoadSceneMode.Single);
     }
 
     public void OnPlayerNameChanged(string s)

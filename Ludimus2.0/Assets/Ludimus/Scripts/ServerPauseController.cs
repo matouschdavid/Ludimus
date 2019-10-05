@@ -13,17 +13,16 @@ public class ServerPauseController : MonoBehaviour
     void Start()
     {
         server = ConnectionController.GetControllerInstance<ServerConnection>();
-        server.AttachMessageHandler(MessageCallback);
+        server.AttachPauseHandler(PauseCallback);
     }
 
-    private void MessageCallback(Data data, Connection connection)
+    private void PauseCallback(bool isPaused)
     {
-        if (data.Key == "StartPause")
+        if (isPaused)
         {
             ui.SetActive(true);
             ConnectionController.Write("StartPause", "");
             server.WaitForGroupAction("EndPause", "", AllClientsWantToResume);
-            // Time.timeScale = 0;
         }
     }
 

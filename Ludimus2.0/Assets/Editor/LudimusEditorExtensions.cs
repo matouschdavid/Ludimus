@@ -92,11 +92,14 @@ public class LudimusEditorExtensions : EditorWindow
     {
         // Get filename.
         string path = EditorUtility.SaveFolderPanel("Choose Location of Built Game", "", "");
-        List<string> levels = new List<string> { "Assets/Ludimus/Scenes/ClientLoggedIn.unity", "Assets/Ludimus/Scenes/ClientConnected.unity", "Assets/Ludimus/Scenes/PauseOverlay_Client.unity", "Assets/Ludimus/Scenes/PauseOverlay_Server.unity" };
+        List<string> levels = new List<string> { "Assets/Ludimus/Scenes/ClientLoggedIn.unity", "Assets/Ludimus/Scenes/ClientConnected.unity", "Assets/Ludimus/Scenes/ClientShop.unity", "Assets/Ludimus/Scenes/PauseOverlay_Client.unity", "Assets/Ludimus/Scenes/PauseOverlay_Server.unity" };
         string gamesFolderPath = Application.dataPath + "/Ludimus/Games/";
         string[] scenes = Directory.GetFiles(gamesFolderPath, "*.unity", SearchOption.AllDirectories);
         levels.AddRange(scenes);
-
+        foreach (var level in levels)
+        {
+            UnityEngine.Debug.Log(level);
+        }
         // Build player.
         BuildPipeline.BuildPlayer(levels.ToArray(), path + "/Client.exe", BuildTarget.StandaloneWindows, BuildOptions.AllowDebugging);
 

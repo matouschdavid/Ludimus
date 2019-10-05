@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9173d3f179af4e84bbc34a4c0aa092c9, type: 3}
+  m_Name: SpinAttack
+  m_EditorClassIdentifier: 
+  Name: Spin to win
+  Description: Hit every enemy around you with one big spin and gain a small shield
+    for every enemy hit
+  Range: 1
+  Picture: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
+  CardType: 1
+  Dmg: 5
+  Block: 3
+  Ability: {fileID: 3180776018743603651, guid: c19a00348c0a3b44b88733eb8ff574c2, type: 3}
+  Message: Spin
+  DamageType: 2
