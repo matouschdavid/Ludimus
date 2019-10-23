@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9173d3f179af4e84bbc34a4c0aa092c9, type: 3}
+  m_Name: Push
+  m_EditorClassIdentifier: 
+  Name: Push
+  Description: Push an enemy away dealing damage when pushing him against a wall
+  Range: 1
+  Picture: {fileID: 21300000, guid: d245addc1a14cb747804663ae969ec2f, type: 3}
+  CardType: 0
+  Other: {fileID: 0}
+  ManaCost: 0
+  Dmg: 5
+  Block: 0
+  Ability: {fileID: 6594487669635667358, guid: ef11d7beee223de4cab619a721ac93db, type: 3}
+  Message: Push
+  DamageType: 1

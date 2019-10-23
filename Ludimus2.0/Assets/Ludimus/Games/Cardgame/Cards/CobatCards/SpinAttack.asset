@@ -16,8 +16,10 @@ MonoBehaviour:
   Description: Hit every enemy around you with one big spin and gain a small shield
     for every enemy hit
   Range: 1
-  Picture: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
-  CardType: 1
+  Picture: {fileID: 21300000, guid: d245addc1a14cb747804663ae969ec2f, type: 3}
+  CardType: 0
+  Other: {fileID: 0}
+  ManaCost: 2
   Dmg: 5
   Block: 3
   Ability: {fileID: 3180776018743603651, guid: c19a00348c0a3b44b88733eb8ff574c2, type: 3}

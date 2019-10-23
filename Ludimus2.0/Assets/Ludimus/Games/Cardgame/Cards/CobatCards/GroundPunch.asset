@@ -15,8 +15,10 @@ MonoBehaviour:
   Name: Groundpunch
   Description: Raise the earth under your opponents to deal massive damage
   Range: 3
-  Picture: {fileID: 21300000, guid: 5fd50594014b70e48bd6993443d46b32, type: 3}
-  CardType: 1
+  Picture: {fileID: 21300000, guid: d245addc1a14cb747804663ae969ec2f, type: 3}
+  CardType: 0
+  Other: {fileID: 0}
+  ManaCost: 2
   Dmg: 7
   Block: 0
   Ability: {fileID: 6594487669635667358, guid: ef11d7beee223de4cab619a721ac93db, type: 3}

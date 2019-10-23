@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Ludimus/Games/Cardgame/Cardgame_Server.unity
+    guid: e10df77e4a87f65479e1e4f7c7675023
+  - enabled: 1
     path: Assets/Ludimus/Scenes/Server.unity
     guid: 08eaee4a778f42b498955dedaf8da995
   - enabled: 1
@@ -26,4 +29,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Ludimus/Scenes/PauseOverlay_Client.unity
     guid: 06a0c81553b88b04f812c1c35b0a3ee0
+  - enabled: 1
+    path: Assets/Ludimus/Scenes/ClientShop.unity
+    guid: 796914fe4fc96be41ba0a44790ff0d05
+  - enabled: 1
+    path: Assets/Ludimus/Games/TestGame2/TestGame2_Client.unity
+    guid: bc081cdeaa62a7741baa4ff5e526e630
+  - enabled: 1
+    path: Assets/Ludimus/Games/TestGame2/TestGame2_Server.unity
+    guid: 3abdf113849975046be54f767d53ffed
   m_configObjects: {}

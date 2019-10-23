@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7160f0459add7d4a8b8630442fbb20b, type: 3}
+  m_Name: ShieldAll
+  m_EditorClassIdentifier: 
+  Name: Gods shield
+  Description: Shields every fiugre of you
+  Range: 0
+  Picture: {fileID: 21300000, guid: 6f8969607901b0640ae2ad8730a39d54, type: 3}
+  CardType: 1
+  Other: {fileID: 0}
+  ManaCost: 1
+  Dmg: 0
+  Block: 3
+  Ability: {fileID: 6594487669635667358, guid: ef11d7beee223de4cab619a721ac93db, type: 3}
+  Message: Shield
+  DamageType: 4
+  TargetType: 1
