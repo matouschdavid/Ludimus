@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.1169
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LudimusConnection", "LudimusConnection\LudimusConnection.csproj", "{7020FD7E-0AEC-406F-97D5-B5D7388C5025}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LudimusTerminalClient", "LudimusTerminalClient\LudimusTerminalClient.csproj", "{0C2D88B4-AA0D-4ED6-BADC-AEC0782315B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LudimusTerminalServer", "LudimusTerminalServer\LudimusTerminalServer.csproj", "{03F7AFB7-57E0-467A-ACAD-3FBA3A4E06D7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{7020FD7E-0AEC-406F-97D5-B5D7388C5025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7020FD7E-0AEC-406F-97D5-B5D7388C5025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7020FD7E-0AEC-406F-97D5-B5D7388C5025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7020FD7E-0AEC-406F-97D5-B5D7388C5025}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0C2D88B4-AA0D-4ED6-BADC-AEC0782315B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C2D88B4-AA0D-4ED6-BADC-AEC0782315B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C2D88B4-AA0D-4ED6-BADC-AEC0782315B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C2D88B4-AA0D-4ED6-BADC-AEC0782315B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03F7AFB7-57E0-467A-ACAD-3FBA3A4E06D7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03F7AFB7-57E0-467A-ACAD-3FBA3A4E06D7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03F7AFB7-57E0-467A-ACAD-3FBA3A4E06D7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03F7AFB7-57E0-467A-ACAD-3FBA3A4E06D7}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {4DF03322-05D3-4B32-A5C0-87B6FAD83979}
+	EndGlobalSection
+EndGlobal
