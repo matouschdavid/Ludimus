@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿
+using Newtonsoft.Json;
 
 namespace LudimusConnection.BusinessObjects.General
 {
@@ -11,6 +12,13 @@ namespace LudimusConnection.BusinessObjects.General
         internal string GetValueAsJson()
         {
             return JsonConvert.SerializeObject(Value);
+        }
+
+        public DataBO(string json)
+        {
+            var obj = JsonConvert.DeserializeObject<DataBO<T>>(json);
+            Key = obj.Key;
+            Value = obj.Value;
         }
     }
 }

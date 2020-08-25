@@ -5,12 +5,12 @@ namespace LudimusConnection.DataAccess.Client
 {
     class ClientConnectionDA<T> : BaseConnectionDA<T>
     {
-        public void OnMessageReceived(DataBO<T> data)
+        private void OnMessageReceived(DataBO<T> data)
         {
-            throw new System.NotImplementedException();
+            messageReceivedDel.Invoke(data, base.self);
         }
 
-        public override bool Teardown()
+        internal protected static bool Teardown()
         {
             throw new System.NotImplementedException();
         }

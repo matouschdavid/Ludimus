@@ -4,83 +4,84 @@ namespace LudimusConnection.DataAccess.General
 {
     public abstract class BaseConnectionDA<T>
     {
-        private MessageReceivedDel<T> messageReceivedDel;
-        private MessageSentDel<T> messageSentDel;
-        private ConnectionChangeHandler playerConnectedDel;
-        private ConnectionChangeHandler beforePlayerDisconnectedDel;
-        private ConnectionChangeHandler afterPlayerDisconnectedDel;
-        
-        public abstract bool Teardown();
+        internal protected static MessageReceivedDel<T> messageReceivedDel;
+        internal protected static MessageSentDel<T> messageSentDel;
+        internal protected static ConnectionChangeHandler playerConnectedDel;
+        internal protected static ConnectionChangeHandler beforePlayerDisconnectedDel;
+        internal protected static ConnectionChangeHandler afterPlayerDisconnectedDel;
+
+        internal protected BaseConnectionBO self;
+
 
         #region EventHandler
-        bool AttachMessageReceivedHandler(MessageReceivedDel<T> handler)
+        public static bool AttachMessageReceivedHandler(MessageReceivedDel<T> handler)
         {
-            if (this.messageReceivedDel == null)
+            if (messageReceivedDel == null)
                 return false;
-            this.messageReceivedDel += handler;
+            messageReceivedDel += handler;
             return true;
         }
-        bool AttachMessageSentHandler(MessageSentDel<T> handler)
+        public static bool AttachMessageSentHandler(MessageSentDel<T> handler)
         {
-            if (this.messageSentDel == null)
+            if (messageSentDel == null)
                 return false;
-            this.messageSentDel += handler;
+            messageSentDel += handler;
             return true;
         }
-        bool AttachPlayerConnectedHandler(ConnectionChangeHandler handler)
+        public static bool AttachPlayerConnectedHandler(ConnectionChangeHandler handler)
         {
-            if (this.playerConnectedDel == null)
+            if (playerConnectedDel == null)
                 return false;
-            this.playerConnectedDel += handler;
+            playerConnectedDel += handler;
             return true;
         }
-        bool AttachBeforePlayerDisconnectedHandler(ConnectionChangeHandler handler)
+        public static bool AttachBeforePlayerDisconnectedHandler(ConnectionChangeHandler handler)
         {
-            if (this.beforePlayerDisconnectedDel == null)
+            if (beforePlayerDisconnectedDel == null)
                 return false;
-            this.beforePlayerDisconnectedDel += handler;
+            beforePlayerDisconnectedDel += handler;
             return true;
         }
-        bool AttachAfterPlayerDisconnectedHandler(ConnectionChangeHandler handler)
+        public static bool AttachAfterPlayerDisconnectedHandler(ConnectionChangeHandler handler)
         {
-            if (this.afterPlayerDisconnectedDel == null)
+            if (afterPlayerDisconnectedDel == null)
                 return false;
-            this.afterPlayerDisconnectedDel += handler;
+            afterPlayerDisconnectedDel += handler;
             return true;
         }
-        bool DetachMessageReceivedHandler(MessageReceivedDel<T> handler)
+        public static bool DetachMessageReceivedHandler(MessageReceivedDel<T> handler)
         {
-            if (this.messageReceivedDel == null)
+            if (messageReceivedDel == null)
                 return false;
-            this.messageReceivedDel -= handler;
+            messageReceivedDel -= handler;
             return true;
         }
-        bool DetachMessageSentHandler(MessageSentDel<T> handler)
+        public static bool DetachMessageSentHandler(MessageSentDel<T> handler)
         {
-            if (this.messageSentDel == null)
+            if (messageSentDel == null)
                 return false;
-            this.messageSentDel -= handler;
+            messageSentDel -= handler;
             return true;
         }
-        bool DetachPlayerConnectedHandler(ConnectionChangeHandler handler)
+        public static bool DetachPlayerConnectedHandler(ConnectionChangeHandler handler)
         {
-            if (this.playerConnectedDel == null)
+            if (playerConnectedDel == null)
                 return false;
-            this.playerConnectedDel -= handler;
+            playerConnectedDel -= handler;
             return true;
         }
-        bool DetachBeforePlayerDisconnectedHandler(ConnectionChangeHandler handler)
+        public static bool DetachBeforePlayerDisconnectedHandler(ConnectionChangeHandler handler)
         {
-            if (this.beforePlayerDisconnectedDel == null)
+            if (beforePlayerDisconnectedDel == null)
                 return false;
-            this.beforePlayerDisconnectedDel -= handler;
+            beforePlayerDisconnectedDel -= handler;
             return true;
         }
-        bool DetachAfterPlayerDisconnectedHandler(ConnectionChangeHandler handler)
+        public static bool DetachAfterPlayerDisconnectedHandler(ConnectionChangeHandler handler)
         {
-            if (this.afterPlayerDisconnectedDel == null)
+            if (afterPlayerDisconnectedDel == null)
                 return false;
-            this.afterPlayerDisconnectedDel -= handler;
+            afterPlayerDisconnectedDel -= handler;
             return true;
         }
         #endregion

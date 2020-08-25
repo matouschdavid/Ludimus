@@ -1,10 +1,11 @@
-﻿using System.Net.Sockets;
+﻿using System;
+using System.Net.Sockets;
 
 namespace LudimusConnection.BusinessObjects.General
 {
     public class BaseConnectionBO
     {
-        public int ID { get; set; }
+        public Guid Guid { get; set; }
         public string Name { get; set; }
         public Socket Socket { get; set; }
 
