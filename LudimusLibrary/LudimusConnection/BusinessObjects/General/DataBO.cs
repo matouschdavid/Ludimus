@@ -1,5 +1,6 @@
 ﻿
 using Newtonsoft.Json;
+using System;
 
 namespace LudimusConnection.BusinessObjects.General
 {
@@ -14,7 +15,12 @@ namespace LudimusConnection.BusinessObjects.General
             return JsonConvert.SerializeObject(Value);
         }
 
-        public DataBO(string json)
+        public DataBO(string key, T value)
+        {
+            Key = key;
+            Value = value;
+        }
+        public DataBO(string json, Type type)
         {
             var obj = JsonConvert.DeserializeObject<DataBO<T>>(json);
             Key = obj.Key;

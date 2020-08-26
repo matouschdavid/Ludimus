@@ -2,7 +2,7 @@
 
 namespace LudimusConnection.BusinessObjects.Server
 {
-    class ServerConnectionBO : BaseConnectionBO
+    public class ServerConnectionBO : BaseConnectionBO
     {
     }
 }

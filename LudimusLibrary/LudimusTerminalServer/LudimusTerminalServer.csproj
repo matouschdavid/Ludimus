@@ -49,5 +49,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\LudimusConnection\LudimusConnection.csproj">
+      <Project>{7020fd7e-0aec-406f-97d5-b5d7388c5025}</Project>
+      <Name>LudimusConnection</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
