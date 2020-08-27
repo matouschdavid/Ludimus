@@ -11,19 +11,13 @@ using System.Runtime.CompilerServices;
 
 namespace LudimusConnection.DataAccess.Server
 {
-    public class ServerConnectionDA<T> : BaseConnectionDA<T>
+    public class ServerConnectionDA : BaseConnectionDA
     {
         private static Socket server = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
 
-        public static List<ClientConnectionBO<T>> connectedClients = new List<ClientConnectionBO<T>>();
+        public static List<ClientConnectionBO> connectedClients = new List<ClientConnectionBO>();
 
-
-        public void OnMessageReceived(DataBO<T> data, BaseConnectionBO connectionBO)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        internal protected static bool Teardown()
+        internal protected static void Teardown()
         {
             try
             {
@@ -36,23 +30,23 @@ namespace LudimusConnection.DataAccess.Server
                 server.Close();
             }catch (Exception)
             {
-                return false;
             }
-            return true;
         }
 
-        public static bool Write(DataBO<T> data)
+        public static bool Write<T>(DataBO<T> data)
         {
             return connectedClients.Select(c => Write(c, data)).All(res => res);
         }
 
-        public static bool Write(BaseConnectionBO connectionBO, DataBO<T> data)
+        public static bool Write<T>(BaseConnectionBO connectionBO, DataBO<T> data)
         {
             return Write(data, connectionBO);
         }
 
         public static void StartServer()
         {
+            onCrashDel += Teardown;
+            isServer = true;
             server.Bind(new IPEndPoint(IPAddress.Any, 8080));
             server.Listen(0);
             server.BeginAccept(AcceptCallback, null);
@@ -71,14 +65,16 @@ namespace LudimusConnection.DataAccess.Server
                 return;
             }
 
-            ClientConnectionBO<T> newClient = new ClientConnectionBO<T>
+            ClientConnectionBO newClient = new ClientConnectionBO
             {
                 Guid = Guid.NewGuid(),
                 Socket = socket,
                 Name = "Connecting..."
             };
-            newClient.OnMessageReceived = messageReceivedDel;
+            newClient.Socket.NoDelay = true;
+            newClient.OnMessageReceived += messageReceivedDel;
             connectedClients.Add(newClient);
+            playerConnectedDel?.Invoke(newClient);
             try
             {
                 newClient.Socket.BeginReceive(buffer, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCallBack, newClient);

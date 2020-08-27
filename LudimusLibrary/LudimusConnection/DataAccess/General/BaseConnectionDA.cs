@@ -1,93 +1,80 @@
 ﻿using LudimusConnection.BusinessObjects.Client;
 using LudimusConnection.BusinessObjects.General;
+using Newtonsoft.Json;
 using System;
 using System.Net.Sockets;
+using System.Reflection;
 
 namespace LudimusConnection.DataAccess.General
 {
-    public abstract class BaseConnectionDA
+    public class BaseConnectionDA
     {
-        internal protected static MessageReceivedDel<object> messageReceivedDel;
-        internal protected static MessageSentDel<object> messageSentDel;
+        internal protected static Action<Object, BaseConnectionBO> messageReceivedDel;
+        internal protected static Action<Object, BaseConnectionBO> messageSentDel;
         internal protected static ConnectionChangeHandler playerConnectedDel;
         internal protected static ConnectionChangeHandler beforePlayerDisconnectedDel;
         internal protected static ConnectionChangeHandler afterPlayerDisconnectedDel;
 
-        internal protected static BaseConnectionBO self;
+        internal protected static Action onCrashDel;
 
-        protected const int BUFFER_SIZE = 255;
+        internal protected static BaseConnectionBO self;
+        internal protected static bool isServer = false;
+
+        protected const int BUFFER_SIZE = 4048;
         internal protected static readonly byte[] buffer = new byte[BUFFER_SIZE];
 
         #region EventHandler
-        public static bool AttachMessageReceivedHandler<T>(MessageReceivedDel<T> handler)
+        public static bool AttachMessageReceivedHandler<T>(Action<DataBO<T>, BaseConnectionBO> handler)
         {
-            if (messageReceivedDel == null)
+            if (handler == null)
                 return false;
 
-            messageReceivedDel += handler as MessageReceivedDel<object>;
+            messageReceivedDel += (data, client) =>
+            {
+                if (handler != null && data is DataBO<T>)
+                {
+                    handler(data as DataBO<T>, client);
+                }
+            };
             return true;
         }
-        public static bool AttachMessageSentHandler<T>(MessageSentDel<T> handler)
+
+        public static bool AttachMessageReceivedHandler(Action<DataBO<object>, BaseConnectionBO> handler)
         {
-            if (messageSentDel == null)
+            return AttachMessageReceivedHandler<object>(handler);
+        }
+        public static bool AttachMessageSentHandler<T>(Action<DataBO<T>, BaseConnectionBO> handler)
+        {
+            if (handler == null)
                 return false;
-            messageSentDel += handler as MessageSentDel<object>;
+            messageSentDel += (data, client) =>
+            {
+                if (handler != null && data is DataBO<T>)
+                {
+                    handler(data as DataBO<T>, client);
+                }
+            }; ;
             return true;
         }
         public static bool AttachPlayerConnectedHandler(ConnectionChangeHandler handler)
         {
-            if (playerConnectedDel == null)
+            if (handler == null)
                 return false;
             playerConnectedDel += handler;
             return true;
         }
         public static bool AttachBeforePlayerDisconnectedHandler(ConnectionChangeHandler handler)
         {
-            if (beforePlayerDisconnectedDel == null)
+            if (handler == null)
                 return false;
             beforePlayerDisconnectedDel += handler;
             return true;
         }
         public static bool AttachAfterPlayerDisconnectedHandler(ConnectionChangeHandler handler)
         {
-            if (afterPlayerDisconnectedDel == null)
+            if (handler == null)
                 return false;
             afterPlayerDisconnectedDel += handler;
-            return true;
-        }
-        public static bool DetachMessageReceivedHandler<T>(MessageReceivedDel<T> handler)
-        {
-            if (messageReceivedDel == null)
-                return false;
-            messageReceivedDel -= handler as MessageReceivedDel<object>;
-            return true;
-        }
-        public static bool DetachMessageSentHandler<T>(MessageSentDel<T> handler)
-        {
-            if (messageSentDel == null)
-                return false;
-            messageSentDel -= handler as MessageSentDel<object>;
-            return true;
-        }
-        public static bool DetachPlayerConnectedHandler(ConnectionChangeHandler handler)
-        {
-            if (playerConnectedDel == null)
-                return false;
-            playerConnectedDel -= handler;
-            return true;
-        }
-        public static bool DetachBeforePlayerDisconnectedHandler(ConnectionChangeHandler handler)
-        {
-            if (beforePlayerDisconnectedDel == null)
-                return false;
-            beforePlayerDisconnectedDel -= handler;
-            return true;
-        }
-        public static bool DetachAfterPlayerDisconnectedHandler(ConnectionChangeHandler handler)
-        {
-            if (afterPlayerDisconnectedDel == null)
-                return false;
-            afterPlayerDisconnectedDel -= handler;
             return true;
         }
         #endregion
@@ -96,38 +83,74 @@ namespace LudimusConnection.DataAccess.General
         {
             ClientConnectionBO client = (ClientConnectionBO)ar.AsyncState;
             int received = 0;
-            received = client.Socket.EndReceive(ar);
+            try
+            {
+                received = client.Socket.EndReceive(ar);
+            }
+            catch (Exception)
+            {
+                onCrashDel?.Invoke();
+            }
 
             byte[] recBuf = new byte[received];
             Array.Copy(buffer, recBuf, received);
             var str = System.Text.Encoding.ASCII.GetString(recBuf);
-            var T = Type.GetType(str.Split('|')[0]);
-            var type = typeof(DataBO<>).MakeGenericType(T.GetType());
-            var d = Activator.CreateInstance(type) as DataBO<>;
-            Console.WriteLine("Received text: " + d.ToString());
-            if (d.Key == LudimusConnectionKeys.CHANGE_PLAYER_NAME)
+            DataBO<object> data = null;
+            do
             {
-                client.Name = d.Value.ToString();
-            }
-            if (client.OnMessageReceived == null) return;
-            foreach (var method in client.OnMessageReceived.GetInvocationList())
-            {
-                if(method.GetType() == T)
+                data = new DataBO<object>(str);
+                if (!(data.Key == null && data.LeftOver == String.Empty))
                 {
+                    if (data.Key == LudimusConnectionKeys.CHANGE_PLAYER_NAME)
+                    {
+                        client.Name = data.Value.ToString();
+                    }
 
+                    var dataBOType = typeof(DataBO<>).MakeGenericType(data.Type);
+                    var result = Activator.CreateInstance(dataBOType);
+                    FieldInfo keyInfo = dataBOType.GetField("Key");
+                    keyInfo.SetValue(result, data.Key);
+                    FieldInfo valueInfo = dataBOType.GetField("Value");
+                    valueInfo.SetValue(result, JsonConvert.DeserializeObject(data.GetValueAsJson(), data.Type));
+                    var objectResult = new DataBO<object>
+                    {
+                        Key = data.Key,
+                        Value = data.Value,
+                    };
+                    if (isServer)
+                    {
+                        client.OnMessageReceived?.Invoke(result, client);
+                        client.OnMessageReceived?.Invoke(objectResult, client);
+                    }
+                    else
+                    {
+                        messageReceivedDel?.Invoke(result, self);
+                        messageReceivedDel?.Invoke(objectResult, self);
+                    }
+                    str = data.LeftOver;
                 }
-            }
-            client.OnMessageReceived.Invoke(d, client);
-
+            } while (data.LeftOver.Length > 0);
             //Wait for next Message
             client.Socket.BeginReceive(buffer, 0, BUFFER_SIZE, SocketFlags.None, ReceiveCallBack, client);
         }
 
         internal protected static bool Write<T>(DataBO<T> data, BaseConnectionBO connectionBO)
         {
-            var bytes = System.Text.Encoding.ASCII.GetBytes(data.GetValueAsJson());
+            data.Type = typeof(T);
+            var len = data.GetAsJson().Length;
+            var dataBOType = typeof(DataBO<>).MakeGenericType(data.Type);
+            var result = Activator.CreateInstance(dataBOType);
+            FieldInfo keyInfo = dataBOType.GetField("Key");
+            keyInfo.SetValue(result, data.Key);
+            FieldInfo valueInfo = dataBOType.GetField("Value");
+            valueInfo.SetValue(result, data.Value);
+            messageSentDel?.Invoke(result, connectionBO);
 
-            return connectionBO.Socket.Send(bytes, 0, bytes.Length, SocketFlags.None) == bytes.Length;
+            var bytes = System.Text.Encoding.ASCII.GetBytes(len + "|" + data.GetAsJson());
+            connectionBO.Socket.SendBufferSize = bytes.Length;
+            int received = connectionBO.Socket.Send(bytes, 0, bytes.Length, SocketFlags.None);
+            
+            return received == bytes.Length;
         }
     }
 }

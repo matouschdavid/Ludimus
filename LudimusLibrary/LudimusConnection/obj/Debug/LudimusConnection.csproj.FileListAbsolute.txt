@@ -1,0 +1,9 @@
+C:\Projects\Ludimus\LudimusLibrary\LudimusConnection\bin\Debug\LudimusConnection.dll
+C:\Projects\Ludimus\LudimusLibrary\LudimusConnection\bin\Debug\LudimusConnection.pdb
+C:\Projects\Ludimus\LudimusLibrary\LudimusConnection\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\Ludimus\LudimusLibrary\LudimusConnection\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\Ludimus\LudimusLibrary\LudimusConnection\obj\Debug\LudimusConnection.csprojAssemblyReference.cache
+C:\Projects\Ludimus\LudimusLibrary\LudimusConnection\obj\Debug\LudimusConnection.csproj.CoreCompileInputs.cache
+C:\Projects\Ludimus\LudimusLibrary\LudimusConnection\obj\Debug\LudimusConnection.csproj.CopyComplete
+C:\Projects\Ludimus\LudimusLibrary\LudimusConnection\obj\Debug\LudimusConnection.dll
+C:\Projects\Ludimus\LudimusLibrary\LudimusConnection\obj\Debug\LudimusConnection.pdb

@@ -1,0 +1,12 @@
+C:\Projects\Ludimus\LudimusLibrary\LudimusTerminalServer\bin\Debug\LudimusTerminalServer.exe.config
+C:\Projects\Ludimus\LudimusLibrary\LudimusTerminalServer\bin\Debug\LudimusTerminalServer.exe
+C:\Projects\Ludimus\LudimusLibrary\LudimusTerminalServer\bin\Debug\LudimusTerminalServer.pdb
+C:\Projects\Ludimus\LudimusLibrary\LudimusTerminalServer\bin\Debug\LudimusConnection.dll
+C:\Projects\Ludimus\LudimusLibrary\LudimusTerminalServer\bin\Debug\Newtonsoft.Json.dll
+C:\Projects\Ludimus\LudimusLibrary\LudimusTerminalServer\bin\Debug\LudimusConnection.pdb
+C:\Projects\Ludimus\LudimusLibrary\LudimusTerminalServer\bin\Debug\Newtonsoft.Json.xml
+C:\Projects\Ludimus\LudimusLibrary\LudimusTerminalServer\obj\Debug\LudimusTerminalServer.csprojAssemblyReference.cache
+C:\Projects\Ludimus\LudimusLibrary\LudimusTerminalServer\obj\Debug\LudimusTerminalServer.csproj.CoreCompileInputs.cache
+C:\Projects\Ludimus\LudimusLibrary\LudimusTerminalServer\obj\Debug\LudimusTerminalServer.csproj.CopyComplete
+C:\Projects\Ludimus\LudimusLibrary\LudimusTerminalServer\obj\Debug\LudimusTerminalServer.exe
+C:\Projects\Ludimus\LudimusLibrary\LudimusTerminalServer\obj\Debug\LudimusTerminalServer.pdb

@@ -11,7 +11,13 @@ namespace LudimusConnection.BusinessObjects.General
 
     }
 
-    public delegate void MessageReceivedDel<T>(DataBO<T> data, BaseConnectionBO connectionBO);
-    public delegate void MessageSentDel<T>(DataBO<T> data);
+    public class Test
+    {
+        public int TestInt { get; set; }
+        public string TestStr { get; set; }
+    }
+
+    public delegate void MessageReceivedDel<T>(T data, BaseConnectionBO connectionBO);
+    public delegate void MessageSentDel<T>(T data);
     public delegate void ConnectionChangeHandler(BaseConnectionBO connectionBO);
 }

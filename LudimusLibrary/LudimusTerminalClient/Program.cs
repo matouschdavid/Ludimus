@@ -9,17 +9,39 @@ namespace LudimusTerminalClient
     {
         static void Main(string[] args)
         {
-            ClientConnectionDA<string>.Connect("test", "192.168.1.38", OnMessageReceived, OnPlayerConnected); 
+            ClientConnectionDA.AttachMessageReceivedHandler(OnMessageReceived);
+
+            Console.Write("Input your name: ");
+            ClientConnectionDA.Connect(Console.ReadLine(), "192.168.1.38", OnPlayerConnected);
+            Console.ReadKey();
         }
 
         private static void OnPlayerConnected(BaseConnectionBO connectionBO)
         {
-            Console.WriteLine("We are connected sir");
+            Console.WriteLine("We're connected");
+            for (int i = 0; i < 500; i++)
+            {
+                ClientConnectionDA.Write(new DataBO<Test>("Input", new Test
+                {
+                    TestInt = 456456645,
+                    TestStr = "LOLOLOLOLOL"
+                }));
+            }
+            ClientConnectionDA.Write(new DataBO<string>("Important", "wichtig"));
+            for (int i = 0; i < 500; i++)
+            {
+                ClientConnectionDA.Write(new DataBO<Test>("Input", new Test
+                {
+                    TestInt = 456456645,
+                    TestStr = "LOLOLOLOLOL"
+                }));
+            }
+            ClientConnectionDA.Write(new DataBO<string>("Finish", ""));
         }
 
-        private static void OnMessageReceived(DataBO<string> data, BaseConnectionBO connectionBO)
+        private static void OnMessageReceived(DataBO<object> arg1, BaseConnectionBO arg2)
         {
-            Console.WriteLine("Incoming message: " + data.Value);
+            Console.WriteLine("Got the message: " + arg1.ToString());
         }
     }
 }
