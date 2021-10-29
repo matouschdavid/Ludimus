@@ -26,7 +26,7 @@ Lets start with the client. The client can send and receive messages and we prov
 ## Writing Data
 To write Data you only have to call the static method ConnectionController.Write()
 All informations between server and client consist of a key and a value. The write method can take two string parameters, the first for the key the second for the value or a data object. Both the client and the server use the same method for writing. The Connection parameter can and should be ignored when writing as a client.
-
+```cs
             ConnectionController.Write("That's my key", "That's my value");
             
             //or
@@ -37,10 +37,11 @@ All informations between server and client consist of a key and a value. The wri
                 Value = "That's my value"
             };
             ConnectionController.Write(data);
+```
 
 ## Receiving Data
 To receive messages you have to attach a callback function. But first you need to get a reference to the client.
-
+```cs
         void Start()
         {
             client = ConnectionController.GetControllerInstance<ClientConnection>();
@@ -51,7 +52,8 @@ To receive messages you have to attach a callback function. But first you need t
         {
             ...
         }
-        
+```
+
 The connection Parameter points to the client, but we don´t need it as a client. The MessageCallback function is called for every new message the client receives.
 
 
@@ -62,20 +64,21 @@ The server is a bit more complicated and possibly subject to change.
 The server can write messages to one or every player. The syntax for writing to every player is the exact same as writing as a client.
         ConnectionController.Write("My key", "my value");
 To write to one specific player you need to have his connection object stored. Then you can write him a message with:
-
+```cs
         ConnectionController.Write(myPlayer, "my key", "my value");
-        
+ ```     
+ 
 ## Receiving Data
 The server can receive single messages just like the client.
-
+```cs
         server = ConnectionController.GetControllerInstance<ServerConnection>();
         server.AttachMessageHandler(MessageCallback);
-        
+```     
 But the server can also wait until some amount of players wrote the same message. Usage examples are waiting until every player is ready or until every player has answered the question (in a quiz game).
 Doing this is very easy.
-
+```cs
         server.WaitForGroupAction("the key you look for", "a value you want send with you", TheCallbackWhenEveryPlayerHasSentTheKey);
-        
+ ```     
 There is an optional fourth parameter that lets you specify how many players have to send the message. For example in a quiz game only the four quickest answers are important. By default every player has to send the message. You still get every message the normal way too.
 
 
