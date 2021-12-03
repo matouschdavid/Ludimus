@@ -16,7 +16,7 @@ These scenes must follow this naming convention:
  
 Even tho we do not intend to constrain our developers, we recommend the following structure:
  
-Use the client for player input and displaying private information and the server for the boardtable, the gameworld or such and for showing information that´s interessting for every player.
+Use the client for player input and displaying private information and the server for the boardtable, the gameworld or such and for showing information that´s interesting for every player.
 
 
 # Client
